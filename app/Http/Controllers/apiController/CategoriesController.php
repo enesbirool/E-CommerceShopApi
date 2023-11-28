@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\Request;
-use Psy\Readline\Hoa\FileException;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class CategoriesController extends Controller
 {
     public function index()
@@ -27,7 +29,7 @@ class CategoriesController extends Controller
         try{
             $validated = $request->validate([
 
-                'name'=> 'required|unique:Category,name',
+                'name'=> 'required|unique:categories,name',
                 'image'=> 'required'
             ]);
 

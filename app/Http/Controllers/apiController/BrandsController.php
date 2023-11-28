@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Exception;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 class BrandsController extends Controller
 {
     public function index()

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
@@ -15,12 +16,12 @@ class LocationsController extends Controller
             'area'=>'required',
         ]);
 
-        Location::create([
-           'street'=>$request->street,
-            'building'=>$request->building,
-            'area'=>$request->area,
-            'user_id'=>$request->Auth::id(),
-        ]);
+        $location=new Location();
+        $location->user_id=Auth::id();
+        $location->street=$request->street;
+        $location->area=$request->area;
+        $location->building=$request->building;
+        $location->save();
         return response()->json(['message'=>'Location Added'],201);
     }
 
